@@ -7,6 +7,8 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import org.json.JSONException;
+
 import java.util.List;
 
 public class MyLocationListener implements LocationListener {
@@ -19,7 +21,11 @@ public class MyLocationListener implements LocationListener {
     @Override
     public void onLocationChanged(@NonNull Location location) {
         Log.d("RRR", "onLocationChanged");
-        locListenerInterface.OnLocationChanged(location);
+        try {
+            locListenerInterface.OnLocationChanged(location);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

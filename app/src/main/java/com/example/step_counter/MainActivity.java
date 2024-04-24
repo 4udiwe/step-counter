@@ -8,6 +8,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,25 +22,44 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.Locale;
+
 public class MainActivity extends AppCompatActivity implements LocListenerInterface{
     private LocationManager locationManager;
     private TextView tvDictance, tvVelocity;
     private Location lastLocation;
     private MyLocationListener myLocationListener;
-    private int distance;
-
-
+    private int distance = 100;
+    private Date now;
+    private FileWorker fileWorker;
+    private Root root;
+    private Stat stat;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
         Log.d("RRR", "oncreate");
 
         init();
         checkPermissions();
+        System.out.println(fileWorker.importFromStatFile(this));
+
     }
 
+    @SuppressLint("SetTextI18n")
     private void init(){
         Log.d("RRR", "Init");
         tvDictance = findViewById(R.id.tvDist);
@@ -48,7 +68,32 @@ public class MainActivity extends AppCompatActivity implements LocListenerInterf
         locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
         myLocationListener = new MyLocationListener();
         myLocationListener.setLocListenerInterface(this);
+
+
+        now = new Date();
+        fileWorker = new FileWorker();
+        /*
+        stat = new Stat(String.format("%tD", now), distance);
+        ArrayList<Stat> stats = new ArrayList<>();
+        stats.add(stat);
+        root = new Root("root", stats);
+        fileWorker.exportToStatFile(this, root);
+
+         */
+
+
+        /*
+        Locale locale = new Locale("ru");
+        Locale.setDefault(locale);
+        Date now = new Date();
+
+        String.format(locale, "%tD\n", now) + //(MM/DD/YY)
+
+        tvVelocity.setText(String.valueOf(now));
+        */
     }
+
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -75,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements LocListenerInterf
     }
 
     @Override
-    public void OnLocationChanged(Location location) {
+    public void OnLocationChanged(Location location) throws JSONException {
         Log.d("RRR", "loc changed");
         if (location.hasSpeed() && lastLocation != null){
             distance += (int) lastLocation.distanceTo(location);
@@ -83,5 +128,20 @@ public class MainActivity extends AppCompatActivity implements LocListenerInterf
         lastLocation = location;
         tvDictance.setText(String.valueOf(distance));
         tvVelocity.setText(String.valueOf(location.getSpeed()));
+
+        //fileWorker.exportToStatFile(this, now, distance);
+
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+        Log.d("RRR", "onSave");
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        Log.d("RRR", "onRestore");
     }
 }
