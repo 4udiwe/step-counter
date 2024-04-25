@@ -10,6 +10,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.util.Log;
+import android.util.Pair;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,14 +38,15 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements LocListenerInterface{
     private LocationManager locationManager;
     private TextView tvDictance, tvVelocity, tvInfo;
     private Location lastLocation;
     private MyLocationListener myLocationListener;
-    private int distance = 100;
-    private Date now;
+    private int distance = 0;
+    private Date currentDate;
     private DBManager dbManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements LocListenerInterf
         myLocationListener = new MyLocationListener();
         myLocationListener.setLocListenerInterface(this);
 
-        now = new Date();
+        currentDate = new Date();
 
         dbManager = new DBManager(this);
 
@@ -90,9 +93,6 @@ public class MainActivity extends AppCompatActivity implements LocListenerInterf
     protected void onResume() {
         super.onResume();
             dbManager.openDB();
-            for (String data : dbManager.readFromDB()){
-                tvInfo.append(data + "\n");
-            }
     }
 
     @Override
@@ -128,15 +128,32 @@ public class MainActivity extends AppCompatActivity implements LocListenerInterf
     @Override
     public void OnLocationChanged(Location location) {
         Log.d("RRR", "loc changed");
+        Date now = new Date();
+        if (!Objects.equals(String.format("%tD", currentDate), String.format("%tD", now))){
+            distance = 0;
+            currentDate = now;
+        }
+
         if (location.hasSpeed() && lastLocation != null){
+            Log.d("RRR", String.valueOf((int) lastLocation.distanceTo(location)));
             distance += (int) lastLocation.distanceTo(location);
         }
         lastLocation = location;
         tvDictance.setText(String.valueOf(distance));
         tvVelocity.setText(String.valueOf(location.getSpeed()));
 
-        dbManager.insertToDB(String.format("%tD", now), distance);
+        dbManager.insertToDB(String.format("%tD", currentDate), distance);
 
     }
 
+    public void onClickClear(View view) {
+        dbManager.clearDB();
+    }
+
+    public void onClickShow(View view) {
+        tvInfo.setText("");
+        for (Pair<String, Integer> data : dbManager.readFromDB()){
+            tvInfo.append(data + "\n");
+        }
+    }
 }

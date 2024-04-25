@@ -5,6 +5,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+import android.util.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,13 +25,17 @@ public class DBManager {
     }
     public void insertToDB(String date, int steps){
         ContentValues cv = new ContentValues();
+
+        int num = db.delete(DBConstants.TABLE_NAME, "date=?", new String[]{date});
+        Log.d("RRR", String.valueOf(num));
+
         cv.put(DBConstants.DATE, date);
         cv.put(DBConstants.STEPS, steps);
         db.insert(DBConstants.TABLE_NAME, null, cv);
     }
     @SuppressLint("Range")
-    public List<String> readFromDB(){
-        List <String> list = new ArrayList<>();
+    public List<Pair<String, Integer>> readFromDB(){
+        List <Pair<String, Integer>> list = new ArrayList<>();
         Cursor cursor = db.query(
                 DBConstants.TABLE_NAME,
                 null,
@@ -40,10 +46,16 @@ public class DBManager {
                 null
                 );
         while (cursor.moveToNext()){
-            list.add(cursor.getString(cursor.getColumnIndex(DBConstants.DATE)));
+            Pair<String, Integer> pair = new Pair<>(
+                    cursor.getString(cursor.getColumnIndex(DBConstants.DATE)),
+                    cursor.getInt(cursor.getColumnIndex(DBConstants.STEPS)));
+            list.add(pair);
         }
         cursor.close();
         return list;
+    }
+    public void clearDB(){
+        db.execSQL("delete from " + DBConstants.TABLE_NAME);
     }
     public void closeDB(){
         dbHelper.close();
