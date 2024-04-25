@@ -22,6 +22,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.step_counter.db.DBManager;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -37,14 +39,12 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements LocListenerInterface{
     private LocationManager locationManager;
-    private TextView tvDictance, tvVelocity;
+    private TextView tvDictance, tvVelocity, tvInfo;
     private Location lastLocation;
     private MyLocationListener myLocationListener;
     private int distance = 100;
     private Date now;
-    private FileWorker fileWorker;
-    private Root root;
-    private Stat stat;
+    private DBManager dbManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements LocListenerInterf
 
         init();
         checkPermissions();
-        System.out.println(fileWorker.importFromStatFile(this));
+
 
     }
 
@@ -64,22 +64,15 @@ public class MainActivity extends AppCompatActivity implements LocListenerInterf
         Log.d("RRR", "Init");
         tvDictance = findViewById(R.id.tvDist);
         tvVelocity = findViewById(R.id.tvVel);
+        tvInfo = findViewById(R.id.tvInfo);
 
         locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
         myLocationListener = new MyLocationListener();
         myLocationListener.setLocListenerInterface(this);
 
-
         now = new Date();
-        fileWorker = new FileWorker();
-        /*
-        stat = new Stat(String.format("%tD", now), distance);
-        ArrayList<Stat> stats = new ArrayList<>();
-        stats.add(stat);
-        root = new Root("root", stats);
-        fileWorker.exportToStatFile(this, root);
 
-         */
+        dbManager = new DBManager(this);
 
 
         /*
@@ -93,7 +86,20 @@ public class MainActivity extends AppCompatActivity implements LocListenerInterf
         */
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+            dbManager.openDB();
+            for (String data : dbManager.readFromDB()){
+                tvInfo.append(data + "\n");
+            }
+    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        dbManager.closeDB();
+    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -120,7 +126,7 @@ public class MainActivity extends AppCompatActivity implements LocListenerInterf
     }
 
     @Override
-    public void OnLocationChanged(Location location) throws JSONException {
+    public void OnLocationChanged(Location location) {
         Log.d("RRR", "loc changed");
         if (location.hasSpeed() && lastLocation != null){
             distance += (int) lastLocation.distanceTo(location);
@@ -129,19 +135,8 @@ public class MainActivity extends AppCompatActivity implements LocListenerInterf
         tvDictance.setText(String.valueOf(distance));
         tvVelocity.setText(String.valueOf(location.getSpeed()));
 
-        //fileWorker.exportToStatFile(this, now, distance);
+        dbManager.insertToDB(String.format("%tD", now), distance);
 
     }
 
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState) {
-        super.onSaveInstanceState(outState, outPersistentState);
-        Log.d("RRR", "onSave");
-    }
-
-    @Override
-    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        Log.d("RRR", "onRestore");
-    }
 }
