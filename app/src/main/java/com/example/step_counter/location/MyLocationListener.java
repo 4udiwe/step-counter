@@ -1,4 +1,4 @@
-package com.example.step_counter;
+package com.example.step_counter.location;
 
 import android.location.Location;
 import android.location.LocationListener;
@@ -8,8 +8,6 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import org.json.JSONException;
-
-import java.util.List;
 
 public class MyLocationListener implements LocationListener {
     private LocListenerInterface locListenerInterface;
@@ -21,11 +19,7 @@ public class MyLocationListener implements LocationListener {
     @Override
     public void onLocationChanged(@NonNull Location location) {
         Log.d("RRR", "onLocationChanged");
-        try {
-            locListenerInterface.OnLocationChanged(location);
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
-        }
+        locListenerInterface.OnLocationChanged(location);
     }
 
     @Override

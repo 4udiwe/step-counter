@@ -1,14 +1,17 @@
 package com.example.step_counter.db;
 
-import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import com.example.step_counter.FragmentMain;
+
+import java.util.Objects;
+
 public class DBHelper extends SQLiteOpenHelper {
-    public DBHelper(@Nullable Context context) {
-        super(context, DBConstants.DB_NAME, null, DBConstants.DB_VERSION);
+    public DBHelper(@Nullable FragmentMain context) {
+        super(Objects.requireNonNull(context).getContext(), DBConstants.DB_NAME, null, DBConstants.DB_VERSION);
     }
 
     @Override

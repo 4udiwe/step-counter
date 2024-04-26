@@ -8,15 +8,17 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import android.util.Pair;
 
+import com.example.step_counter.FragmentMain;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class DBManager {
-    private Context context;
+    private FragmentMain context;
     private DBHelper dbHelper;
     private SQLiteDatabase db;
 
-    public DBManager(Context context) {
+    public DBManager(FragmentMain context) {
         this.context = context;
         dbHelper = new DBHelper(context);
     }
