@@ -5,13 +5,13 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-import com.example.step_counter.FragmentMain;
+import com.example.step_counter.MainActivity;
 
 import java.util.Objects;
 
 public class DBHelper extends SQLiteOpenHelper {
-    public DBHelper(@Nullable FragmentMain context) {
-        super(Objects.requireNonNull(context).getContext(), DBConstants.DB_NAME, null, DBConstants.DB_VERSION);
+    public DBHelper(@Nullable MainActivity context) {
+        super(Objects.requireNonNull(context), DBConstants.DB_NAME, null, DBConstants.DB_VERSION);
     }
 
     @Override

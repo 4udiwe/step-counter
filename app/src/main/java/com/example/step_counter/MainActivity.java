@@ -8,10 +8,6 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.Pair;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -29,17 +25,16 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.Date;
 import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity {
-    private LocationManager locationManager;
-    private TextView tvDictance, tvVelocity, tvInfo;
+public class MainActivity extends AppCompatActivity implements LocListenerInterface{
+    public LocationManager locationManager;
+
     private Location lastLocation;
     private MyLocationListener myLocationListener;
-    private int distance = 0;
+    public int distance = 0;
     private Date currentDate;
     private DBManager dbManager;
 
-    public MainActivity() {
-    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d("RRR", "oncreate");
 
         init();
-        //checkPermissions();
+        checkPermissions();
 
 
     }
@@ -58,12 +53,15 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     private void init(){
         Log.d("RRR", "Init");
-        /*
-        tvDictance = findViewById(R.id.tvDist);
-        tvVelocity = findViewById(R.id.tvVel);
-        tvInfo = findViewById(R.id.tvInfo);
+        locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 
-         */
+
+        currentDate = new Date();
+        dbManager = new DBManager(this);
+        myLocationListener = new MyLocationListener();
+        myLocationListener.setLocListenerInterface(this);
+
+
         @SuppressLint("RestrictedApi")
         BottomNavigationView bottomNavigationView;
         bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -95,21 +93,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
-
-        //locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-        //myLocationListener = new MyLocationListener();
-
-        //myLocationListener.setLocListenerInterface(this);
-
-        //currentDate = new Date();
-
-        //dbManager = new DBManager(this);
-
     }
 
 
-    /*
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -121,22 +108,44 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         dbManager.closeDB();
     }
-    */
 
+    @Override
+    public void OnLocationChanged(Location location) {
+        Log.d("RRR", "loc changed");
+        Date now = new Date();
+        if (!Objects.equals(String.format("%tD", currentDate), String.format("%tD", now))){
+            distance = 0;
+            currentDate = now;
+        }
 
-
-
-
-
-    public void onClickClear(View view) {
-        dbManager.clearDB();
+        if (location.hasSpeed() && lastLocation != null){
+            Log.d("RRR", String.valueOf((int) lastLocation.distanceTo(location)));
+            distance += (int) lastLocation.distanceTo(location);
+        }
+        lastLocation = location;
+        dbManager.insertToDB(String.format("%tD", currentDate), distance);
     }
-
-    public void onClickShow(View view) {
-        tvInfo.setText("");
-        for (Pair<String, Integer> data : dbManager.readFromDB()){
-            tvInfo.append(data + "\n");
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        Log.d("RRR", "onRequestPermissionsResult");
+        if(requestCode == 100 && grantResults[0] == RESULT_OK){
+            checkPermissions();
+        }
+        else {
+            Toast.makeText(this, "No GPS permission", Toast.LENGTH_LONG).show();
         }
     }
 
+    private void checkPermissions(){
+        Log.d("RRR", "checkPermissions");
+        if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+            requestPermissions(new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION},
+                    100);
+        }
+        else {
+            Log.d("RRR", "loc request");
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,2, 1, myLocationListener);
+        }
+    }
 }

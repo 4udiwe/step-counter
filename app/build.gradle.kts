@@ -30,8 +30,7 @@ android {
 
 dependencies {
 
-    implementation (libs.gson)
-
+    implementation(libs.swiperefreshlayout)
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)

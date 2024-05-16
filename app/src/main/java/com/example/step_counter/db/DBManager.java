@@ -3,24 +3,28 @@ package com.example.step_counter.db;
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import android.util.Pair;
 
 import com.example.step_counter.FragmentMain;
+import com.example.step_counter.MainActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DBManager {
-    private FragmentMain context;
+    private MainActivity context;
     private DBHelper dbHelper;
     private SQLiteDatabase db;
+    private SharedPreferences sharedPreferences;
 
-    public DBManager(FragmentMain context) {
+    public DBManager(MainActivity context) {
         this.context = context;
         dbHelper = new DBHelper(context);
+        sharedPreferences = context.getSharedPreferences("mypref", Context.MODE_PRIVATE);
     }
     public void openDB(){
         db = dbHelper.getWritableDatabase();
@@ -34,6 +38,20 @@ public class DBManager {
         cv.put(DBConstants.DATE, date);
         cv.put(DBConstants.STEPS, steps);
         db.insert(DBConstants.TABLE_NAME, null, cv);
+    }
+    @SuppressLint("Range")
+    public int readLastFromDB(){
+        Cursor cursor = db.query(
+                DBConstants.TABLE_NAME,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+        );
+        cursor.moveToLast();
+        return cursor.getInt(cursor.getColumnIndex(DBConstants.STEPS));
     }
     @SuppressLint("Range")
     public List<Pair<String, Integer>> readFromDB(){
@@ -55,6 +73,14 @@ public class DBManager {
         }
         cursor.close();
         return list;
+    }
+    public void setTarget(int target){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("target", target);
+        editor.apply();
+    }
+    public int getTarget(){
+        return sharedPreferences.getInt("target", -1);
     }
     public void clearDB(){
         db.execSQL("delete from " + DBConstants.TABLE_NAME);

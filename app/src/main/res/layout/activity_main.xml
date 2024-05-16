@@ -16,7 +16,7 @@
     <FrameLayout
         android:id="@+id/fragmcontainer"
         android:layout_width="match_parent"
-        android:layout_height="649dp">
+        android:layout_height="651dp"
+        android:clickable="false" />
 
-    </FrameLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
