@@ -13,19 +13,35 @@
         android:id="@+id/tvDist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Passed distance"
-        android:textSize="24sp"
+        android:text="Dist"
+        android:textSize="40sp"
+        android:layout_marginEnd="80sp"
+        android:layout_marginTop="180dp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.289" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="555dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="180dp"
+        android:indeterminate="false"
+        android:indeterminateOnly="false"
+        android:mirrorForRtl="true"
+        android:rotation="-90"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/swiperefresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="58dp"
+        tools:layout_editor_absoluteY="16dp">
 
         <ListView
             android:id="@android:id/list"
@@ -34,18 +50,7 @@
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_margin="30dp"
-        android:indeterminateOnly="false"
-        android:mirrorForRtl="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDist" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

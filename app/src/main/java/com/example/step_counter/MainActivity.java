@@ -55,12 +55,10 @@ public class MainActivity extends AppCompatActivity implements LocListenerInterf
         Log.d("RRR", "Init");
         locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 
-
         currentDate = new Date();
         dbManager = new DBManager(this);
         myLocationListener = new MyLocationListener();
         myLocationListener.setLocListenerInterface(this);
-
 
         @SuppressLint("RestrictedApi")
         BottomNavigationView bottomNavigationView;
@@ -91,8 +89,10 @@ public class MainActivity extends AppCompatActivity implements LocListenerInterf
             }
             return false;
         });
-
-
+        FragmentMain main = new FragmentMain();
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragmcontainer, main);
+        fragmentTransaction.commit();
     }
 
 
@@ -117,9 +117,7 @@ public class MainActivity extends AppCompatActivity implements LocListenerInterf
             distance = 0;
             currentDate = now;
         }
-
         if (location.hasSpeed() && lastLocation != null){
-            Log.d("RRR", String.valueOf((int) lastLocation.distanceTo(location)));
             distance += (int) lastLocation.distanceTo(location);
         }
         lastLocation = location;
