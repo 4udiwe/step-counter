@@ -4,8 +4,6 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +14,7 @@ import android.widget.TextView;
 import com.example.step_counter.db.DBManager;
 
 
-public class FragmentMain extends Fragment {
+public class FragmentMain extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     private TextView tvDictance;
     private DBManager dbManager;
     private ProgressBar progressBar;
@@ -37,20 +35,24 @@ public class FragmentMain extends Fragment {
         progressBar = view.findViewById(R.id.progressBar);
         progressBar.setMax(dbManager.getTarget());
 
-        Log.d("RRR", view.toString());
 
-        swipeRefresh = view.findViewById(R.id.swiperefresh);
-        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                dbManager.openDB();
-                tvDictance.setText(String.valueOf(dbManager.readLastFromDB()));
-                dbManager.closeDB();
-            }
-        });
+        swipeRefresh = (SwipeRefreshLayout) view.findViewById(R.id.swiperefresh);
+        swipeRefresh.setOnRefreshListener(this);
+        onRefresh();
 
 
         return view;
     }
 
+    @Override
+    public void onRefresh() {
+        Log.d("RRR", "Refresh");
+        dbManager.openDB();
+        int steps = dbManager.readLastFromDB();
+        tvDictance.setText(String.valueOf(steps));
+        progressBar.setProgress(steps,true);
+        dbManager.closeDB();
+        swipeRefresh.setRefreshing(false);
+
+    }
 }

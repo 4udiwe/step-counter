@@ -30,7 +30,7 @@ android {
 
 dependencies {
 
-    implementation(libs.swiperefreshlayout)
+    implementation (libs.swiperefreshlayout.v120alpha01)
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)

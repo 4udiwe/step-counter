@@ -17,6 +17,8 @@
         android:id="@+id/fragmcontainer"
         android:layout_width="match_parent"
         android:layout_height="651dp"
-        android:clickable="false" />
+        android:clickable="false"
+        android:isScrollContainer="true"
+        android:overScrollMode="ifContentScrolls" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

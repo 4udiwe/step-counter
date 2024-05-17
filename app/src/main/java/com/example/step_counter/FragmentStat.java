@@ -1,64 +1,50 @@
 package com.example.step_counter;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.util.Log;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link FragmentStat#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class FragmentStat extends Fragment {
+import com.example.step_counter.db.DBManager;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+public class FragmentStat extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private TextView tvStat;
+    private SwipeRefreshLayout swipeRefresh;
+    private DBManager dbManager;
 
-    public FragmentStat() {
-        // Required empty public constructor
-    }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentStat.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static FragmentStat newInstance(String param1, String param2) {
-        FragmentStat fragment = new FragmentStat();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    @SuppressLint("MissingInflatedId")
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_stat, container, false);
+        tvStat = view.findViewById(R.id.tvStat);
+        dbManager = new DBManager((MainActivity) this.getContext());
+        swipeRefresh = (SwipeRefreshLayout) view.findViewById(R.id.swiperefresh);
+        swipeRefresh.setOnRefreshListener(this);
+
+        onRefresh();
+
+        return view;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+    public void onRefresh() {
+        Log.d("RRR", "Refresh");
+        tvStat.setText("");
+        dbManager.openDB();
+        for (Pair<String, Integer> data : dbManager.readFromDB()){
+            tvStat.append(data + "\n");
         }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_stat, container, false);
+        dbManager.closeDB();
+        swipeRefresh.setRefreshing(false);
     }
 }
