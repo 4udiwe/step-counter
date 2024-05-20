@@ -100,6 +100,7 @@ public class MainActivity extends AppCompatActivity implements LocListenerInterf
     protected void onResume() {
         super.onResume();
         dbManager.openDB();
+        distance = dbManager.readLastFromDB();
     }
 
     @Override
@@ -125,7 +126,7 @@ public class MainActivity extends AppCompatActivity implements LocListenerInterf
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         Log.d("RRR", "onRequestPermissionsResult");
-        if(requestCode == 100 && grantResults[0] == RESULT_OK){
+        if(requestCode == 100){
             checkPermissions();
         }
         else {

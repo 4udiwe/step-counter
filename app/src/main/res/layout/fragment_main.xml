@@ -13,24 +13,60 @@
         android:id="@+id/tvDist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Dist"
+        android:text="@string/dist"
         android:textSize="40sp"
         android:layout_marginEnd="80sp"
-        android:layout_marginTop="180dp"
+        android:layout_marginTop="80sp"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/passed_distance"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="60sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/_0"
+        android:textSize="30sp"
+        app:layout_constraintTop_toBottomOf="@+id/progressBar"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginEnd="220sp"
+        android:layout_marginTop="220sp"
+        />
+
+    <TextView
+        android:id="@+id/tvtargetsteps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/_0"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/progressBar"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginEnd="220sp"
+        android:layout_marginBottom="220sp"
+        />
+
+
+
     <ProgressBar
         android:id="@+id/progressBar"
         style="@android:style/Widget.ProgressBar.Horizontal"
-        android:layout_width="555dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="180dp"
+        android:layout_width="555sp"
+        android:layout_height="60sp"
+        android:layout_marginTop="80sp"
         android:indeterminate="false"
         android:indeterminateOnly="false"
         android:mirrorForRtl="true"
+        android:progressTint="#9C27B0"
         android:rotation="-90"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

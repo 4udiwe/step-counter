@@ -4,41 +4,41 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FragmentMain">
+    tools:context=".FragmentSettings">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
-        android:text="FRAGMENT SETTINGS"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/bSetTarget"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:onClick="onSetTargetClicked"
-        android:text="Set target"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="87dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/apply"
+        app:layout_constraintStart_toEndOf="@+id/edDayTarget"
         app:layout_constraintTop_toTopOf="@+id/edDayTarget"
         app:toggleCheckedStateOnClick="false" />
 
     <EditText
         android:id="@+id/edDayTarget"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_width="102dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="8dp"
         android:autoText="false"
         android:ems="10"
+        android:hint="10000"
         android:inputType="number"
-        app:layout_constraintEnd_toStartOf="@+id/bSetTarget"
-        app:layout_constraintHorizontal_bias="0.625"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="160dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="124dp"
+        android:text="@string/set_daily_target"
+        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
