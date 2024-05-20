@@ -28,7 +28,7 @@ public class FragmentStat extends Fragment implements SwipeRefreshLayout.OnRefre
         View view = inflater.inflate(R.layout.fragment_stat, container, false);
         tvStat = view.findViewById(R.id.tvStat);
         dbManager = new DBManager((MainActivity) this.getContext());
-        swipeRefresh = (SwipeRefreshLayout) view.findViewById(R.id.swiperefresh);
+        swipeRefresh = view.findViewById(R.id.swiperefresh);
         swipeRefresh.setOnRefreshListener(this);
 
         onRefresh();

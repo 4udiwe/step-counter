@@ -38,12 +38,9 @@ public class FragmentSettings extends Fragment {
 
 
         bSetTarget = view.findViewById(R.id.bSetTarget);
-        bSetTarget.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("RRR", "onclick : " + edTarget.getInputType());
-                dbManager.setTarget(Integer.parseInt(edTarget.getText().toString()));
-            }
+        bSetTarget.setOnClickListener(v -> {
+            Log.d("RRR", "onclick : " + edTarget.getInputType());
+            dbManager.setTarget(Integer.parseInt(edTarget.getText().toString()));
         });
 
         return view;

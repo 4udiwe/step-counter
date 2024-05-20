@@ -14,6 +14,7 @@ import com.example.step_counter.MainActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class DBManager {
     private MainActivity context;
@@ -39,6 +40,7 @@ public class DBManager {
         cv.put(DBConstants.STEPS, steps);
         db.insert(DBConstants.TABLE_NAME, null, cv);
     }
+
     @SuppressLint("Range")
     public int readLastFromDB(){
         Cursor cursor = db.query(
@@ -50,8 +52,13 @@ public class DBManager {
                 null,
                 null
         );
+        if (cursor.getCount() == 0){
+            return 0;
+        }
         cursor.moveToLast();
-        return cursor.getInt(cursor.getColumnIndex(DBConstants.STEPS));
+        int steps = cursor.getInt(cursor.getColumnIndex(DBConstants.STEPS));
+        cursor.close();
+        return Math.max(steps, 0);
     }
     @SuppressLint("Range")
     public List<Pair<String, Integer>> readFromDB(){

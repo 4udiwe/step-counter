@@ -7,8 +7,6 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import org.json.JSONException;
-
 public class MyLocationListener implements LocationListener {
     private LocListenerInterface locListenerInterface;
 

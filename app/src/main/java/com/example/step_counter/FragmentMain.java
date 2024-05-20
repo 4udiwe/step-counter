@@ -21,6 +21,7 @@ public class FragmentMain extends Fragment implements SwipeRefreshLayout.OnRefre
     private SwipeRefreshLayout swipeRefresh;
 
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,10 +37,10 @@ public class FragmentMain extends Fragment implements SwipeRefreshLayout.OnRefre
         progressBar.setMax(dbManager.getTarget());
 
 
-        swipeRefresh = (SwipeRefreshLayout) view.findViewById(R.id.swiperefresh);
+        swipeRefresh = view.findViewById(R.id.swiperefresh);
         swipeRefresh.setOnRefreshListener(this);
-        onRefresh();
 
+        onRefresh();
 
         return view;
     }

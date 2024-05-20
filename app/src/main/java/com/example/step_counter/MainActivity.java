@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.step_counter.db.DBConstants;
 import com.example.step_counter.db.DBManager;
 import com.example.step_counter.location.LocListenerInterface;
 import com.example.step_counter.location.MyLocationListener;
@@ -30,9 +31,9 @@ public class MainActivity extends AppCompatActivity implements LocListenerInterf
 
     private Location lastLocation;
     private MyLocationListener myLocationListener;
-    public int distance = 0;
     private Date currentDate;
     private DBManager dbManager;
+    private int distance = 0;
 
 
 
@@ -46,8 +47,6 @@ public class MainActivity extends AppCompatActivity implements LocListenerInterf
 
         init();
         checkPermissions();
-
-
     }
 
     @SuppressLint("SetTextI18n")
