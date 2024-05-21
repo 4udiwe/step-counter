@@ -25,33 +25,35 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="60sp"
         android:text="@string/passed_distance"
         android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="60sp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="20sp"
         android:layout_height="wrap_content"
         android:text="@string/_0"
         android:textSize="30sp"
-        app:layout_constraintTop_toBottomOf="@+id/progressBar"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/progressBar"
+        app:layout_constraintRight_toRightOf="@id/progressBar"
         android:layout_marginEnd="220sp"
         android:layout_marginTop="220sp"
         />
 
     <TextView
-        android:id="@+id/tvtargetsteps"
-        android:layout_width="wrap_content"
+        android:id="@+id/tvTarget"
+        android:layout_width="180sp"
         android:layout_height="wrap_content"
         android:text="@string/_0"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/progressBar"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginEnd="220sp"
+
+        app:layout_constraintBottom_toTopOf="@id/progressBar"
+
+        app:layout_constraintRight_toRightOf="@id/progressBar"
+        android:layout_marginEnd="60sp"
         android:layout_marginBottom="220sp"
         />
 
@@ -69,15 +71,17 @@
         android:progressTint="#9C27B0"
         android:rotation="-90"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="-180sp"
+        />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swiperefresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="58dp"
-        tools:layout_editor_absoluteY="16dp">
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <ListView
             android:id="@android:id/list"
@@ -85,8 +89,6 @@
             android:layout_height="match_parent" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

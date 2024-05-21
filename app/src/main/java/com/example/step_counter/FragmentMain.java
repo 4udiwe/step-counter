@@ -1,6 +1,5 @@
 package com.example.step_counter;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -12,13 +11,11 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.step_counter.R.id;
 import com.example.step_counter.db.DBManager;
 
 
 public class FragmentMain extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     private TextView tvDictance;
-    private TextView tvTarget;
     private DBManager dbManager;
     private ProgressBar progressBar;
     private SwipeRefreshLayout swipeRefresh;
@@ -34,14 +31,19 @@ public class FragmentMain extends Fragment implements SwipeRefreshLayout.OnRefre
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
+        TextView tvTarget = view.findViewById(R.id.tvTarget);
         tvDictance = view.findViewById(R.id.tvDist);
-        tvTarget = view.findViewById(id.tvtargetsteps);//ошибка
+
+
         dbManager = new DBManager((MainActivity) this.getContext());
         progressBar = view.findViewById(R.id.progressBar);
-        //progressBar.setMax(dbManager.getTarget());
 
 
-        tvTarget.setText(dbManager.getTarget());
+        int target = dbManager.getTarget();
+        progressBar.setMax(target);
+        if (target > 0){
+            tvTarget.setText(String.valueOf(target));
+        }
         swipeRefresh = view.findViewById(R.id.swiperefresh);
         swipeRefresh.setOnRefreshListener(this);
 
