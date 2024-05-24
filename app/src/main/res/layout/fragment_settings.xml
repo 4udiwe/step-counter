@@ -9,36 +9,41 @@
 
     <Button
         android:id="@+id/bSetTarget"
-        android:layout_width="87dp"
+        android:layout_width="wrap_content"
         android:layout_height="42dp"
         android:layout_marginStart="8dp"
+        android:layout_marginEnd="10dp"
         android:text="@string/apply"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/edDayTarget"
         app:layout_constraintTop_toTopOf="@+id/edDayTarget"
         app:toggleCheckedStateOnClick="false" />
 
     <EditText
         android:id="@+id/edDayTarget"
-        android:layout_width="102dp"
+        android:layout_width="80dp"
         android:layout_height="46dp"
-        android:layout_marginStart="8dp"
         android:autoText="false"
         android:ems="10"
         android:hint="10000"
         android:inputType="number"
         android:textSize="24sp"
+        app:layout_constraintEnd_toStartOf="@+id/bSetTarget"
         app:layout_constraintStart_toEndOf="@+id/textView"
         app:layout_constraintTop_toTopOf="@+id/textView" />
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="160dp"
+        android:layout_width="0dp"
         android:layout_height="42dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="124dp"
+        android:layout_marginEnd="8dp"
         android:text="@string/set_daily_target"
         android:textSize="24sp"
+        app:layout_constraintEnd_toStartOf="@+id/edDayTarget"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
