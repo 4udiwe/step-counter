@@ -1,10 +1,12 @@
 <resources>
     <string name="app_name">step-counter</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="apply">Apply</string>
     <string name="set_daily_target">Set daily target</string>
     <string name="passed_distance">Passed distance</string>
     <string name="_0">0</string>
     <string name="dist">Dist</string>
+    <string name="date">Date</string>
+    <string name="distance">Distance</string>
+    <string name="average_distance">Average distance</string>
+    <string name="daily_target_acheaving">Daily target acheaving</string>
 </resources>

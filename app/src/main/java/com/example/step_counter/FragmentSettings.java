@@ -11,8 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.step_counter.R.id;
 import com.example.step_counter.db.DBManager;
 
 public class FragmentSettings extends Fragment {
@@ -20,6 +22,7 @@ public class FragmentSettings extends Fragment {
     private DBManager dbManager;
     private EditText edTarget;
     private Button bSetTarget, bSetFakeDB;
+    private Spinner spinner;
 
 
     @Override
@@ -35,18 +38,14 @@ public class FragmentSettings extends Fragment {
         bSetTarget = view.findViewById(R.id.bSetTarget);
         edTarget = view.findViewById(R.id.edDayTarget);
         bSetFakeDB = view.findViewById(R.id.bSetFake);
+        //spinner = view.findViewById(id.spinner);
+
 
 
         int target = dbManager.getTarget();
         if (target > 0){
             edTarget.setText(String.valueOf(target));
         }
-
-
-
-
-
-
 
         bSetTarget.setOnClickListener(new View.OnClickListener() {
             @Override

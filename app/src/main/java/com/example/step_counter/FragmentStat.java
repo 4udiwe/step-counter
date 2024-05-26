@@ -22,34 +22,31 @@ import com.example.step_counter.recyclerview.UserStatModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FragmentStat extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
+public class FragmentStat extends Fragment {
 
-    //private TextView tvStat;
-    //private SwipeRefreshLayout swipeRefresh;
+
     private DBManager dbManager;
     private ArrayList<UserStatModel> userStatModels = new ArrayList<>();
-    RecyclerView recyclerView;
+    private RecyclerView recyclerView;
+    private TextView tvAverageDist, tvTargetAcheaving;
+    private float averagedist = 0, targetach = 0, target;
 
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_stat, container, false);
-        //tvStat = view.findViewById(R.id.tvStat);
         dbManager = new DBManager((MainActivity) this.getContext());
-        //swipeRefresh = view.findViewById(R.id.swiperefresh);
-        //swipeRefresh.setOnRefreshListener(this);
-
+        tvAverageDist = view.findViewById(R.id.tvAverageDistance);
+        tvTargetAcheaving = view.findViewById(R.id.tvTargetAcheaving);
         recyclerView = view.findViewById(R.id.rvStatistic);
+
+        target = dbManager.getTarget();
 
         SetUpUserStatModels();
 
-
-
-
-
-
-        //onRefresh();
+        tvAverageDist.setText(String.valueOf((int) averagedist));
+        tvTargetAcheaving.setText(String.valueOf((int) targetach));
 
         return view;
     }
@@ -60,26 +57,18 @@ public class FragmentStat extends Fragment implements SwipeRefreshLayout.OnRefre
         List<Pair<String, Integer>> stats = dbManager.readFromDB();
         for (Pair<String, Integer> data : stats){
             userStatModels.add(new UserStatModel(data.first, data.second));
+            averagedist += data.second;
+            if (data.second >= target)
+                targetach++;
         }
         dbManager.closeDB();
+
+        averagedist /= stats.size();
+        targetach /= stats.size();
+        targetach *= 100;
 
         USRecycleViewAdapter adapter = new USRecycleViewAdapter(this.getContext(), userStatModels);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
-    }
-
-    @Override
-    public void onRefresh() {
-        Log.d("RRR", "Refresh");
-        /*
-        tvStat.setText("");
-        dbManager.openDB();
-        for (Pair<String, Integer> data : dbManager.readFromDB()){
-            tvStat.append(data + "\n");
-        }
-
-         */
-        //dbManager.closeDB();
-        //swipeRefresh.setRefreshing(false);
     }
 }

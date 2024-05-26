@@ -51,7 +51,7 @@ public class USRecycleViewAdapter extends RecyclerView.Adapter<USRecycleViewAdap
         holder.progressBar.setMax(target);
         holder.progressBar.setProgress(progress);
         if (progress >= target)
-            holder.progressBar.setProgressTintList(ColorStateList.valueOf(Color.GREEN));
+            holder.progressBar.setProgressTintList(ColorStateList.valueOf(Color.rgb(200, 30, 60)));
     }
 
     @Override
