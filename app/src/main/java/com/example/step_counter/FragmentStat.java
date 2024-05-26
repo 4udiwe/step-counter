@@ -55,16 +55,13 @@ public class FragmentStat extends Fragment implements SwipeRefreshLayout.OnRefre
     }
 
     public void SetUpUserStatModels(){
-        /*
+
         dbManager.openDB();
         List<Pair<String, Integer>> stats = dbManager.readFromDB();
         for (Pair<String, Integer> data : stats){
-            userStatModels.add(new UserStatModel(data.second, data.first));
+            userStatModels.add(new UserStatModel(data.first, data.second));
         }
         dbManager.closeDB();
-        */
-        userStatModels.add(new UserStatModel("00/00/00", 100));
-        userStatModels.add(new UserStatModel("01/10/10", 222));
 
         USRecycleViewAdapter adapter = new USRecycleViewAdapter(this.getContext(), userStatModels);
         recyclerView.setAdapter(adapter);

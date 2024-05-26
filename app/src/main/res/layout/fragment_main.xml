@@ -61,14 +61,14 @@
 
     <ProgressBar
         android:id="@+id/progressBar"
-        style="@android:style/Widget.ProgressBar.Horizontal"
+        style="@android:style/Widget.Holo.ProgressBar.Horizontal"
         android:layout_width="555sp"
         android:layout_height="60sp"
         android:layout_marginTop="80sp"
         android:indeterminate="false"
         android:indeterminateOnly="false"
         android:mirrorForRtl="true"
-        android:progressTint="#9C27B0"
+        android:progressTint="#C36273"
         android:rotation="-90"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
