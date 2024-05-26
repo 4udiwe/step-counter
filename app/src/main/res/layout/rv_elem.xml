@@ -12,41 +12,54 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+
             <ProgressBar
                 android:id="@+id/rv_elem_pbStat"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="176dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="16dp"
+                style="@android:style/Widget.Holo.ProgressBar.Horizontal"
+                android:layout_width="0dp"
+                android:layout_height="40sp"
+                android:fadeScrollbars="false"
+                android:fitsSystemWindows="false"
+                android:forceDarkAllowed="true"
+                android:indeterminate="false"
+                android:indeterminateBehavior="repeat"
+                android:progress="50"
+                android:progressTint="#C36273"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/rv_elem_tvProgress"
-                android:layout_width="wrap_content"
+                android:layout_width="64sp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:text="TextView"
+                android:layout_marginEnd="24sp"
+                android:text="10000"
+                android:textAlignment="textEnd"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/rv_elem_pbStat"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintEnd_toStartOf="@+id/rv_elem_tvDate"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.523" />
 
             <TextView
                 android:id="@+id/rv_elem_tvDate"
-                android:layout_width="wrap_content"
+                android:layout_width="90sp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:text="TextView"
+                android:layout_marginEnd="32sp"
+                android:text="00/00/00"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/rv_elem_tvProgress"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.476" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

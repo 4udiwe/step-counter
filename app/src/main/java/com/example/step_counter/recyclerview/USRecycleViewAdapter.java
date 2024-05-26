@@ -1,6 +1,8 @@
 package com.example.step_counter.recyclerview;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,10 +44,14 @@ public class USRecycleViewAdapter extends RecyclerView.Adapter<USRecycleViewAdap
 
     @Override
     public void onBindViewHolder(@NonNull USRecycleViewAdapter.MyViewHolder holder, int position) {
+        int target = dbManager.getTarget();
+        int progress = userStatModels.get(position).getProgress();
         holder.tvDate.setText(userStatModels.get(position).getDate());
         holder.tvProg.setText(String.valueOf(userStatModels.get(position).getProgress()));
-        holder.progressBar.setMax(dbManager.getTarget());
-        holder.progressBar.setProgress(userStatModels.get(position).getProgress());
+        holder.progressBar.setMax(target);
+        holder.progressBar.setProgress(progress);
+        if (progress >= target)
+            holder.progressBar.setProgressTintList(ColorStateList.valueOf(Color.GREEN));
     }
 
     @Override
