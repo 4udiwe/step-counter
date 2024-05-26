@@ -19,30 +19,33 @@
             android:layout_height="match_parent">
 
             <ProgressBar
-                android:id="@+id/pbStat"
+                android:id="@+id/rv_elem_pbStat"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="176dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tvProgress"
+                android:id="@+id/rv_elem_tvProgress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
                 android:text="TextView"
-                app:layout_constraintStart_toEndOf="@id/pbStat"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/rv_elem_pbStat"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tvDate"
+                android:id="@+id/rv_elem_tvDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
                 android:text="TextView"
-                app:layout_constraintStart_toEndOf="@id/tvProgress"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/rv_elem_tvProgress"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

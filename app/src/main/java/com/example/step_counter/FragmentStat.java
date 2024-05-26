@@ -25,27 +25,29 @@ import java.util.List;
 public class FragmentStat extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
 
     //private TextView tvStat;
-    private SwipeRefreshLayout swipeRefresh;
+    //private SwipeRefreshLayout swipeRefresh;
     private DBManager dbManager;
-    private ArrayList<UserStatModel> userStatModels = new ArrayList<>();;
+    private ArrayList<UserStatModel> userStatModels = new ArrayList<>();
+    RecyclerView recyclerView;
 
 
-    @SuppressLint("MissingInflatedId")
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_stat, container, false);
         //tvStat = view.findViewById(R.id.tvStat);
         dbManager = new DBManager((MainActivity) this.getContext());
-        swipeRefresh = view.findViewById(R.id.swiperefresh);
-        swipeRefresh.setOnRefreshListener(this);
+        //swipeRefresh = view.findViewById(R.id.swiperefresh);
+        //swipeRefresh.setOnRefreshListener(this);
 
-        RecyclerView recyclerView = view.findViewById(R.id.rvStatistic);
+        recyclerView = view.findViewById(R.id.rvStatistic);
 
         SetUpUserStatModels();
 
-        USRecycleViewAdapter adapter = new USRecycleViewAdapter(this.getContext(), userStatModels);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+
+
+
+
 
         //onRefresh();
 
@@ -53,13 +55,20 @@ public class FragmentStat extends Fragment implements SwipeRefreshLayout.OnRefre
     }
 
     public void SetUpUserStatModels(){
+        /*
         dbManager.openDB();
         List<Pair<String, Integer>> stats = dbManager.readFromDB();
         for (Pair<String, Integer> data : stats){
             userStatModels.add(new UserStatModel(data.second, data.first));
         }
         dbManager.closeDB();
+        */
+        userStatModels.add(new UserStatModel("00/00/00", 100));
+        userStatModels.add(new UserStatModel("01/10/10", 222));
 
+        USRecycleViewAdapter adapter = new USRecycleViewAdapter(this.getContext(), userStatModels);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
     }
 
     @Override

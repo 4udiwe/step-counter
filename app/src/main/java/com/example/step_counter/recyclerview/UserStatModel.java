@@ -12,7 +12,7 @@ public class UserStatModel {
         return date;
     }
 
-    public UserStatModel(int progress, String date) {
+    public UserStatModel(String date, int progress) {
         this.progress = progress;
         this.date = date;
     }

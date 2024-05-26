@@ -10,7 +10,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.step_counter.MainActivity;
 import com.example.step_counter.R;
+import com.example.step_counter.db.DBManager;
 
 import java.util.ArrayList;
 
@@ -18,10 +20,13 @@ public class USRecycleViewAdapter extends RecyclerView.Adapter<USRecycleViewAdap
 
     Context context;
     ArrayList<UserStatModel> userStatModels;
+    DBManager dbManager;
+
 
     public USRecycleViewAdapter (Context context, ArrayList<UserStatModel> userStatModels){
         this.context = context;
         this.userStatModels = userStatModels;
+        dbManager = new DBManager((MainActivity) context);
     }
 
 
@@ -38,8 +43,9 @@ public class USRecycleViewAdapter extends RecyclerView.Adapter<USRecycleViewAdap
     @Override
     public void onBindViewHolder(@NonNull USRecycleViewAdapter.MyViewHolder holder, int position) {
         holder.tvDate.setText(userStatModels.get(position).getDate());
-        holder.tvProg.setText(userStatModels.get(position).getProgress());
-
+        holder.tvProg.setText(String.valueOf(userStatModels.get(position).getProgress()));
+        holder.progressBar.setMax(dbManager.getTarget());
+        holder.progressBar.setProgress(userStatModels.get(position).getProgress());
     }
 
     @Override
@@ -48,15 +54,15 @@ public class USRecycleViewAdapter extends RecyclerView.Adapter<USRecycleViewAdap
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
-
         TextView tvDate, tvProg;
         ProgressBar progressBar;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            tvDate = itemView.findViewById(R.id.tvDate);
-            tvProg = itemView.findViewById(R.id.tvProgress);
-            progressBar = itemView.findViewById(R.id.pbStat);
+            tvDate = itemView.findViewById(R.id.rv_elem_tvDate);
+            tvProg = itemView.findViewById(R.id.rv_elem_tvProgress);
+            progressBar = itemView.findViewById(R.id.rv_elem_pbStat);
+
         }
     }
 }
