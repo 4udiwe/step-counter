@@ -10,17 +10,45 @@
     tools:context=".FragmentMain">
 
     <TextView
+        android:id="@+id/tvSteps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:text="@string/_10000"
+        android:textColor="@color/gray"
+        app:layout_constraintTop_toBottomOf="@id/tvDist"
+        app:layout_constraintRight_toRightOf="@id/tvDist" />
+    <TextView
         android:id="@+id/tvDist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/dist"
+        android:text="@string/_10000"
+        android:textColor="@color/black"
         android:textSize="40sp"
-        android:layout_marginEnd="80sp"
+        android:layout_marginEnd="100sp"
         android:layout_marginTop="80sp"
-
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/m"
+        android:textSize="36sp"
+        android:textColor="@color/my_ligth_red"
+        android:layout_marginStart="4dp"
+        app:layout_constraintStart_toEndOf="@id/tvDist"
+        app:layout_constraintBottom_toBottomOf="@id/tvDist" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:text="@string/steps"
+        android:textColor="@color/my_ligth_red"
+        app:layout_constraintTop_toTopOf="@id/tvSteps"
+        app:layout_constraintLeft_toRightOf="@id/tvSteps"
+        android:layout_marginStart="4dp"/>
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -57,49 +85,22 @@
         android:layout_marginBottom="220sp"
         />
 
-
-    <View
-        android:layout_width="20dp"
-        android:layout_height="6dp"
-        android:background="@color/my_ligth_red"
-        app:layout_constraintTop_toTopOf="@id/progressBar"
-        app:layout_constraintBottom_toBottomOf="@id/progressBar"
-        app:layout_constraintEnd_toEndOf="@id/progressBar"
-        android:layout_marginEnd="250sp"/>
-    <View
-        android:layout_width="20dp"
-        android:layout_height="6dp"
-        android:background="@color/my_ligth_red"
-        app:layout_constraintBottom_toBottomOf="@id/progressBar"
-        app:layout_constraintEnd_toEndOf="@id/progressBar"
-        android:layout_marginEnd="250sp"
-        android:layout_marginBottom="300sp"/>
-    <View
-        android:layout_width="20dp"
-        android:layout_height="6dp"
-        android:background="@color/my_ligth_red"
-        app:layout_constraintTop_toTopOf="@id/progressBar"
-        app:layout_constraintEnd_toEndOf="@id/progressBar"
-        android:layout_marginEnd="250sp"
-        android:layout_marginTop="300sp"/>
-
     <ProgressBar
         android:id="@+id/progressBar"
-        style="@android:style/Widget.Holo.ProgressBar.Horizontal"
+        style="@android:style/Widget.ProgressBar.Horizontal"
         android:layout_width="555sp"
         android:layout_height="60sp"
+        android:layout_marginStart="-180dp"
         android:layout_marginTop="80sp"
         android:indeterminate="false"
         android:indeterminateOnly="false"
         android:mirrorForRtl="true"
+        android:progress="70"
         android:progressTint="@color/my_ligth_red"
         android:rotation="-90"
-        android:progress="100"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="-180sp"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swiperefresh"

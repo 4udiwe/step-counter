@@ -1,14 +1,11 @@
 package com.example.step_counter;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,7 +35,7 @@ public class FragmentStat extends Fragment {
         View view = inflater.inflate(R.layout.fragment_stat, container, false);
         dbManager = new DBManager((MainActivity) this.getContext());
         tvAverageDist = view.findViewById(R.id.tvAverageDistance);
-        tvTargetAcheaving = view.findViewById(R.id.tvTargetAcheaving);
+        tvTargetAcheaving = view.findViewById(R.id.tvTargetAcheavment);
         recyclerView = view.findViewById(R.id.rvStatistic);
 
         target = dbManager.getTarget();

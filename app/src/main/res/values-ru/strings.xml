@@ -6,6 +6,8 @@
     <string name="date">Дата</string>
     <string name="distance">Расстояние</string>
     <string name="average_distance">Среднее расстояние</string>
-    <string name="daily_target_acheaving">Достижение дневной цели</string>
+    <string name="daily_target_acheavment">Достижение дневной цели</string>
     <string name="new_target_toast">Новая цель установлена:</string>
+    <string name="m">м</string>
+    <string name="steps">шагов</string>
 </resources>

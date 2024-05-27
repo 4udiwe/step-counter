@@ -15,7 +15,7 @@ import com.example.step_counter.db.DBManager;
 
 
 public class FragmentMain extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
-    private TextView tvDictance;
+    private TextView tvDictance, tvSteps;
     private DBManager dbManager;
     private ProgressBar progressBar;
     private SwipeRefreshLayout swipeRefresh;
@@ -33,6 +33,7 @@ public class FragmentMain extends Fragment implements SwipeRefreshLayout.OnRefre
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         TextView tvTarget = view.findViewById(R.id.tvTarget);
         tvDictance = view.findViewById(R.id.tvDist);
+        tvSteps = view.findViewById(R.id.tvSteps);
 
 
         dbManager = new DBManager((MainActivity) this.getContext());
@@ -56,9 +57,10 @@ public class FragmentMain extends Fragment implements SwipeRefreshLayout.OnRefre
     public void onRefresh() {
         Log.d("RRR", "Refresh");
         dbManager.openDB();
-        int steps = dbManager.readLastFromDB();
-        tvDictance.setText(String.valueOf(steps));
-        progressBar.setProgress(steps,true);
+        int dist = dbManager.readLastFromDB();
+        tvDictance.setText(String.valueOf(dist));
+        tvSteps.setText(String.valueOf((int) (dist * 1.4)));
+        progressBar.setProgress(dist,true);
         dbManager.closeDB();
         swipeRefresh.setRefreshing(false);
 
