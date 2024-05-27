@@ -1,12 +1,14 @@
 <resources>
-    <string name="app_name">step-counter</string>
+    <string name="app_name" translatable="false">step-counter</string>
     <string name="apply">Apply</string>
     <string name="set_daily_target">Set daily target</string>
     <string name="passed_distance">Passed distance</string>
-    <string name="_0">0</string>
-    <string name="dist">Dist</string>
+    <string name="_0" translatable="false">0</string>
+    <string name="dist" translatable="false">Dist</string>
     <string name="date">Date</string>
     <string name="distance">Distance</string>
     <string name="average_distance">Average distance</string>
     <string name="daily_target_acheaving">Daily target acheaving</string>
+    <string name="new_target_toast">New target is set: </string>
+    <string name="_10000" translatable="false">10000</string>
 </resources>

@@ -13,6 +13,7 @@
         android:layout_height="42dp"
         android:layout_marginEnd="10dp"
         android:text="@string/apply"
+        android:onClick="onClickApplyTarget"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/edDayTarget"
         app:layout_constraintTop_toTopOf="@+id/edDayTarget"
@@ -23,9 +24,12 @@
         android:layout_width="80dp"
         android:layout_height="46dp"
         android:autoText="false"
+        android:clickable="true"
         android:ems="10"
-        android:hint="10000"
+        android:hint="@string/_10000"
         android:inputType="number"
+        android:singleLine="false"
+        android:textColor="@color/gray"
         android:textSize="24sp"
         app:layout_constraintEnd_toStartOf="@+id/bSetTarget"
         app:layout_constraintStart_toEndOf="@+id/textView"
@@ -43,19 +47,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="209dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="44dp"
-        android:text="Choose language"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toStartOf="@+id/edDayTarget"
-        app:layout_constraintHorizontal_bias="0.571"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
     <Button
         android:id="@+id/bSetFake"
         android:layout_width="wrap_content"
@@ -66,14 +57,5 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="139dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="20dp"
-        android:spinnerMode="dropdown"
-        app:layout_constraintStart_toEndOf="@+id/textView1"
-        app:layout_constraintTop_toTopOf="@+id/textView1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

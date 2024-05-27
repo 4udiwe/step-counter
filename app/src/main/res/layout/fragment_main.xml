@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="60sp"
         android:text="@string/passed_distance"
-        android:textSize="40sp"
+        android:textSize="32sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -58,6 +58,30 @@
         />
 
 
+    <View
+        android:layout_width="20dp"
+        android:layout_height="6dp"
+        android:background="@color/my_ligth_red"
+        app:layout_constraintTop_toTopOf="@id/progressBar"
+        app:layout_constraintBottom_toBottomOf="@id/progressBar"
+        app:layout_constraintEnd_toEndOf="@id/progressBar"
+        android:layout_marginEnd="250sp"/>
+    <View
+        android:layout_width="20dp"
+        android:layout_height="6dp"
+        android:background="@color/my_ligth_red"
+        app:layout_constraintBottom_toBottomOf="@id/progressBar"
+        app:layout_constraintEnd_toEndOf="@id/progressBar"
+        android:layout_marginEnd="250sp"
+        android:layout_marginBottom="300sp"/>
+    <View
+        android:layout_width="20dp"
+        android:layout_height="6dp"
+        android:background="@color/my_ligth_red"
+        app:layout_constraintTop_toTopOf="@id/progressBar"
+        app:layout_constraintEnd_toEndOf="@id/progressBar"
+        android:layout_marginEnd="250sp"
+        android:layout_marginTop="300sp"/>
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -68,8 +92,9 @@
         android:indeterminate="false"
         android:indeterminateOnly="false"
         android:mirrorForRtl="true"
-        android:progressTint="#C36273"
+        android:progressTint="@color/my_ligth_red"
         android:rotation="-90"
+        android:progress="100"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -80,7 +105,7 @@
         android:id="@+id/swiperefresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="0dp">
 
         <ListView

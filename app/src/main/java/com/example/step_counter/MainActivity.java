@@ -16,7 +16,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.step_counter.db.DBConstants;
 import com.example.step_counter.db.DBManager;
 import com.example.step_counter.location.LocListenerInterface;
 import com.example.step_counter.location.MyLocationListener;
@@ -48,7 +47,6 @@ public class MainActivity extends AppCompatActivity implements LocListenerInterf
         init();
         checkPermissions();
     }
-
     @SuppressLint("SetTextI18n")
     private void init(){
         Log.d("RRR", "Init");
@@ -93,22 +91,17 @@ public class MainActivity extends AppCompatActivity implements LocListenerInterf
         fragmentTransaction.replace(R.id.fragmcontainer, main);
         fragmentTransaction.commit();
     }
-
-
-
     @Override
     protected void onResume() {
         super.onResume();
         dbManager.openDB();
         distance = dbManager.readLastFromDB();
     }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
         dbManager.closeDB();
     }
-
     @Override
     public void OnLocationChanged(Location location) {
         Log.d("RRR", "loc changed");
@@ -133,7 +126,6 @@ public class MainActivity extends AppCompatActivity implements LocListenerInterf
             Toast.makeText(this, "No GPS permission", Toast.LENGTH_LONG).show();
         }
     }
-
     private void checkPermissions(){
         Log.d("RRR", "checkPermissions");
         if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
@@ -146,4 +138,5 @@ public class MainActivity extends AppCompatActivity implements LocListenerInterf
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,2, 1, myLocationListener);
         }
     }
+
 }

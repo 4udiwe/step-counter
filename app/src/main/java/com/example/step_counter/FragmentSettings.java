@@ -1,6 +1,10 @@
 package com.example.step_counter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,6 +13,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -17,12 +23,14 @@ import android.widget.Toast;
 import com.example.step_counter.R.id;
 import com.example.step_counter.db.DBManager;
 
+import java.util.ArrayList;
+import java.util.Locale;
+
 public class FragmentSettings extends Fragment {
 
     private DBManager dbManager;
     private EditText edTarget;
     private Button bSetTarget, bSetFakeDB;
-    private Spinner spinner;
 
 
     @Override
@@ -38,22 +46,21 @@ public class FragmentSettings extends Fragment {
         bSetTarget = view.findViewById(R.id.bSetTarget);
         edTarget = view.findViewById(R.id.edDayTarget);
         bSetFakeDB = view.findViewById(R.id.bSetFake);
-        //spinner = view.findViewById(id.spinner);
-
-
 
         int target = dbManager.getTarget();
         if (target > 0){
             edTarget.setText(String.valueOf(target));
         }
-
         bSetTarget.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d("RRR", "new target set: " + edTarget.getText());
                 dbManager.setTarget(Integer.parseInt(edTarget.getText().toString()));
+
+                Toast.makeText(getContext(), getString(R.string.new_target_toast) + edTarget.getText().toString(), Toast.LENGTH_SHORT).show();
             }
         });
+
 
         bSetFakeDB.setOnClickListener(v -> {
             dbManager.openDB();
@@ -81,4 +88,5 @@ public class FragmentSettings extends Fragment {
 
         return view;
     }
+
 }

@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">step-counter</string>
     <string name="apply">Принять</string>
     <string name="set_daily_target">Ежедневная цель</string>
     <string name="passed_distance">Пройденное расстояние</string>
-    <string name="_0">0</string>
-    <string name="dist">Dist</string>
     <string name="date">Дата</string>
     <string name="distance">Расстояние</string>
     <string name="average_distance">Среднее расстояние</string>
     <string name="daily_target_acheaving">Достижение дневной цели</string>
+    <string name="new_target_toast">Новая цель установлена:</string>
 </resources>

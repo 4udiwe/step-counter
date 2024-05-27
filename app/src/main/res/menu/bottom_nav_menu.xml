@@ -2,17 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/home"
-        android:icon="@drawable/ic_launcher_background"
-        android:title="Главная"/>
+        android:icon="@mipmap/ic_runningshoe_foreground"
+        android:title="Главная" />
 
     <item
         android:id="@+id/statistic"
-        android:icon="@drawable/ic_launcher_background"
+        android:icon="@mipmap/ic_list_foreground"
         android:title="Статистика"/>
 
     <item
         android:id="@+id/settings"
-        android:icon="@drawable/ic_launcher_background"
+        android:icon="@mipmap/ic_settings_foreground"
         android:title="Настройки"/>
 
 </menu>
