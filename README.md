@@ -39,7 +39,9 @@
 
 ### Запуск приложения
 
-#Pedometer (EN)
+
+
+# Pedometer (EN)
 
 ## Project description
 
