@@ -2,12 +2,13 @@
 <resources>
     <string name="apply">Принять</string>
     <string name="set_daily_target">Ежедневная цель</string>
-    <string name="passed_distance">Пройденное расстояние</string>
+    <string name="passed_distance">Сегодня пройдено</string>
     <string name="date">Дата</string>
     <string name="distance">Расстояние</string>
     <string name="average_distance">Среднее расстояние</string>
-    <string name="daily_target_acheavment">Достижение дневной цели</string>
+    <string name="daily_target_acheavment">Достижение цели</string>
     <string name="new_target_toast">Новая цель установлена:</string>
     <string name="m">м</string>
     <string name="steps">шагов</string>
+    <string name="set_data">Установить данные</string>
 </resources>

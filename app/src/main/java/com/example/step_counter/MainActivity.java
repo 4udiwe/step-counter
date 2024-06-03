@@ -38,6 +38,11 @@ public class MainActivity extends AppCompatActivity implements LocListenerInterf
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         super.onCreate(savedInstanceState);
 
         EdgeToEdge.enable(this);

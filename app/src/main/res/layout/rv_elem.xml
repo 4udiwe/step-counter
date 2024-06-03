@@ -31,7 +31,7 @@
                 android:indeterminateBehavior="repeat"
                 android:progress="50"
                 android:progressBackgroundTint="#FFFFFF"
-                android:progressTint="#C36273"
+                android:progressTint="@color/my_ligth_red"
                 android:scrollbarAlwaysDrawHorizontalTrack="false"
                 android:scrollbarAlwaysDrawVerticalTrack="false"
                 app:layout_constraintBottom_toBottomOf="parent"

@@ -1,11 +1,14 @@
 package com.example.step_counter.recyclerview;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.Transformation;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -42,6 +45,7 @@ public class USRecycleViewAdapter extends RecyclerView.Adapter<USRecycleViewAdap
         return new USRecycleViewAdapter.MyViewHolder(view);
     }
 
+    @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(@NonNull USRecycleViewAdapter.MyViewHolder holder, int position) {
         int target = dbManager.getTarget();
@@ -50,8 +54,12 @@ public class USRecycleViewAdapter extends RecyclerView.Adapter<USRecycleViewAdap
         holder.tvProg.setText(String.valueOf(userStatModels.get(position).getProgress()));
         holder.progressBar.setMax(target);
         holder.progressBar.setProgress(progress);
+        ProgressBarAnimation animation = new ProgressBarAnimation(holder.progressBar, 0, progress);
+        animation.setDuration(1500);
+        holder.progressBar.setAnimation(animation);
         if (progress >= target)
-            holder.progressBar.setProgressTintList(ColorStateList.valueOf(Color.rgb(200, 30, 60)));
+            //holder.progressBar.setProgressTintList(ColorStateList.valueOf(Color.rgb(200, 30, 60)));
+            holder.progressBar.setProgressTintList(ColorStateList.valueOf(Color.rgb(218, 59, 59)));
     }
 
     @Override
@@ -70,5 +78,25 @@ public class USRecycleViewAdapter extends RecyclerView.Adapter<USRecycleViewAdap
             progressBar = itemView.findViewById(R.id.rv_elem_pbStat);
 
         }
+    }
+    class ProgressBarAnimation extends Animation {
+        private ProgressBar progressBar;
+        private float from;
+        private float  to;
+
+        public ProgressBarAnimation(ProgressBar progressBar, float from, float to) {
+            super();
+            this.progressBar = progressBar;
+            this.from = from;
+            this.to = to;
+        }
+
+        @Override
+        protected void applyTransformation(float interpolatedTime, Transformation t) {
+            super.applyTransformation(interpolatedTime, t);
+            float value = from + (to - from) * interpolatedTime;
+            progressBar.setProgress((int) value);
+        }
+
     }
 }

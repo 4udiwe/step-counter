@@ -12,4 +12,5 @@
     <string name="_10000" translatable="false">10000</string>
     <string name="m">m</string>
     <string name="steps">steps</string>
+    <string name="set_data">Set data</string>
 </resources>

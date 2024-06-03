@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.Transformation;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -61,8 +63,31 @@ public class FragmentMain extends Fragment implements SwipeRefreshLayout.OnRefre
         tvDictance.setText(String.valueOf(dist));
         tvSteps.setText(String.valueOf((int) (dist * 1.4)));
         progressBar.setProgress(dist,true);
+        ProgressBarAnimation animation = new ProgressBarAnimation(progressBar, 0, dist);
+        animation.setDuration(1500);
+        progressBar.setAnimation(animation);
         dbManager.closeDB();
         swipeRefresh.setRefreshing(false);
+
+    }
+    class ProgressBarAnimation extends Animation {
+        private ProgressBar progressBar;
+        private float from;
+        private float  to;
+
+        public ProgressBarAnimation(ProgressBar progressBar, float from, float to) {
+            super();
+            this.progressBar = progressBar;
+            this.from = from;
+            this.to = to;
+        }
+
+        @Override
+        protected void applyTransformation(float interpolatedTime, Transformation t) {
+            super.applyTransformation(interpolatedTime, t);
+            float value = from + (to - from) * interpolatedTime;
+            progressBar.setProgress((int) value);
+        }
 
     }
 }
