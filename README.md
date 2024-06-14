@@ -75,9 +75,3 @@ The following conditions are required for the Pedometer application to work:
 - Minimum Android SDK version: 24 (Android 7.0 Nougat)
 - SDK version for compilation: 34 (latest at the time of development)
 - Compiles with Java 8 support (sourceCompatibility and targetCompatibility require JavaVersion.VERSION_1_8)
-
-## Installation and launch
-
-### Installing dependencies
-
-### Launch the application
